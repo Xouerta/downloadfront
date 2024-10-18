@@ -1,10 +1,20 @@
-import type { FormInstance } from "element-plus";
+import request from "@/utils/request";
 import LoginForm from "./LoginForm.vue"
-import type { FormData } from './types'
 export default LoginForm;
 
-export function onSubmit(props: FormData) {
-    console.log(props.password)
-    console.log(11);
-    
+import type { FormData } from './types'
+import type { FormInstance } from 'element-plus'
+import route from "./route";
+
+export const submitForm = async (formEl: FormInstance | undefined, formData: FormData) => {
+    if (!formEl || !formEl?.validate) return
+    await formEl.validate((valid, fields) => {
+        if (valid) {
+            route.POST()
+            console.log("");
+
+        } else {
+            console.log('error submit!', fields)
+        }
+    })
 }
