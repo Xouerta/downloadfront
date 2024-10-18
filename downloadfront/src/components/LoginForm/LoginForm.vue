@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import type { FormData } from './types'
-import { submitForm } from './index'
+import type { FormDataType } from './types'
+// import { submitForm } from './index'
+import action from './action'
 import type { FormInstance, FormRules } from 'element-plus'
 
 const formRef = ref<FormInstance>()
-const formData = reactive<FormData>({
+const formData = reactive<FormDataType>({
   username: '',
   password: '',
 })
-
-const rules = reactive<FormRules<FormData>>({
+const rules = reactive<FormRules<FormDataType>>({
   username: [
     {
       required: true,
@@ -37,7 +37,7 @@ const rules = reactive<FormRules<FormData>>({
       <el-input v-model="formData.password" />
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm(formRef, formData)">登录</el-button>
+      <el-button type="primary" @click="action.submitForm(formRef, formData)">登录</el-button>
     </el-form-item>
   </el-form>
 </template>

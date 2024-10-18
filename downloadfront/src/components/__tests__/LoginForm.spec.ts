@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import LoginForm from '@/components/LoginForm' // 调整为你的组件正确路径
 import route from '../LoginForm/route'
+import action from '@/components/LoginForm/action'
 
 describe('LoginForm', () => {
   const wrapper = mount(LoginForm)
@@ -13,11 +14,12 @@ describe('LoginForm', () => {
   })
 
   it("点击按钮后若input框为空不发送网络请求", async() => {
-    const onSubmitSpy = vi.spyOn(wrapper.vm, "submitForm" as never)
+    // const onSubmitSpy = vi.spyOn(wrapper.vm, "submitForm" as never)
+    const onSubmitSpy = vi.spyOn(action, 'submitForm')
     const POSTSpy = vi.spyOn(route, 'POST');
 
     await button.trigger('click')
-    
+
     expect(onSubmitSpy).toHaveBeenCalledOnce()
     expect(POSTSpy).not.toBeCalled()
   })
@@ -27,7 +29,7 @@ describe('LoginForm', () => {
     inputs[0].element.textContent = "username"
     inputs[1].element.textContent = "password"
 
-    const onSubmitSpy = vi.spyOn(wrapper.vm, "submitForm" as never)
+    const onSubmitSpy = vi.spyOn(action, 'submitForm')
 
     await button.trigger('click')
     expect(onSubmitSpy).toHaveBeenCalledOnce()
