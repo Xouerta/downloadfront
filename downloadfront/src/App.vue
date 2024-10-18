@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import LoginForm from '@/components/LoginForm'
+import DropUpload from '@/components/DropUpload'
 </script>
 
 <template>
-  <LoginForm />
+  <DropUpload />
 </template>
